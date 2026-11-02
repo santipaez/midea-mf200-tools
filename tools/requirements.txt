@@ -1,0 +1,4 @@
+# Midea MF200 Reverse Engineering Tools
+# Phase 1: Network discovery (no external deps needed for basic scan)
+# Phase 2+: Device communication
+midea-local>=1.1.0
