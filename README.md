@@ -1,5 +1,7 @@
 # midea-mf200-tools
 
+[![ci](https://github.com/santipaez/midea-mf200-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/santipaez/midea-mf200-tools/actions/workflows/ci.yml)
+
 Reverse engineering notes and tooling for the local protocol of a Midea MF200
 washer-dryer. The goal was narrow: run **fresh air** — fan plus slow drum
 rotation, no water, no heat — as a standalone program.
