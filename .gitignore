@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+captures/*
+!captures/.gitkeep
+results/
+*.zip
+*.lua
+*.log
