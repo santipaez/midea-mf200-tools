@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" role="img" aria-labelledby="t d">
+  <title id="t">MF200 frame layout, one cell per byte</title>
+  <desc id="d">The status frame has 52 bytes and exposes fresh air at index 29, bit 6. The control frame has 22 bytes, with steam at index 16 bit 4 and the fresh air write at index 19 bit 0. Options that must not change are sent as 0xFF.</desc>
+
+  <rect width="900" height="380" fill="#ffffff"/>
+  <text x="40" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f172a">Two frames, two layouts</text>
+  <text x="40" y="56" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">The same feature sits at a different index depending on direction. That asymmetry is the whole trap.</text>
+
+  <text x="40" y="112" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0f172a">STATUS</text>
+  <text x="40" y="128" font-family="IBM Plex Mono, monospace" font-size="10" fill="#64748b">52 bytes</text>
+  <text x="764" y="121" font-family="IBM Plex Mono, monospace" font-size="9" fill="#64748b">body[51]</text>
+
+  <g>
+  <rect x="130" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="142" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="154" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="166" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="178" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="190" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="202" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="214" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="226" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="238" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="250" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="262" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="274" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="286" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="298" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="310" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="322" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="334" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="346" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="358" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="370" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="382" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="394" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="406" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="418" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="430" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="442" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="454" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="466" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="478" y="96" width="12" height="40" fill="#a64b1e" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="484.0" y="119.5" font-family="IBM Plex Mono, monospace" font-size="10" fill="#ffffff" text-anchor="middle">29</text>
+  <rect x="490" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="502" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="514" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="526" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="538" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="550" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="562" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="574" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="586" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="598" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="610" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="622" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="634" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="646" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="658" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="670" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="682" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="694" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="706" y="96" width="12" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="718" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="730" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="742" y="96" width="12" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  </g>
+
+  <path d="M 484.0 136 L 484.0 156" stroke="#a64b1e" stroke-width="1.2" fill="none"/>
+  <text x="484.0" y="172" font-family="IBM Plex Mono, monospace" font-size="10" fill="#7c2d12" text-anchor="middle">body[29] · bit 6 · 0x80 to 0xC0</text>
+  <text x="484.0" y="188" font-family="IBM Plex Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">fresh air, read</text>
+
+  <text x="40" y="252" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0f172a">CONTROL</text>
+  <text x="40" y="268" font-family="IBM Plex Mono, monospace" font-size="10" fill="#64748b">22 bytes</text>
+  <text x="756" y="257" font-family="IBM Plex Mono, monospace" font-size="9" fill="#64748b">body[21]</text>
+
+  <g>
+  <rect x="130" y="232" width="28" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="158" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="186" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="214" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="242" y="232" width="28" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="270" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="298" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="326" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="354" y="232" width="28" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="382" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="410" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="438" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="466" y="232" width="28" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="494" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="522" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="550" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="578" y="232" width="28" height="40" fill="#a64b1e" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="592.0" y="255.5" font-family="IBM Plex Mono, monospace" font-size="10" fill="#ffffff" text-anchor="middle">16</text>
+  <rect x="606" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="634" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="662" y="232" width="28" height="40" fill="#a64b1e" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="676.0" y="255.5" font-family="IBM Plex Mono, monospace" font-size="10" fill="#ffffff" text-anchor="middle">19</text>
+  <rect x="690" y="232" width="28" height="40" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="718" y="232" width="28" height="40" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  </g>
+
+  <path d="M 592.0 272 L 592.0 292" stroke="#a64b1e" stroke-width="1.2" fill="none" opacity="0.65"/>
+  <text x="592.0" y="308" font-family="IBM Plex Mono, monospace" font-size="10" fill="#7c2d12" text-anchor="middle">body[16]</text>
+  <text x="592.0" y="322" font-family="IBM Plex Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">bit 4</text>
+
+  <path d="M 676.0 272 L 676.0 292" stroke="#a64b1e" stroke-width="1.2" fill="none"/>
+  <text x="676.0" y="308" font-family="IBM Plex Mono, monospace" font-size="10" fill="#7c2d12" text-anchor="middle">body[19]</text>
+  <text x="676.0" y="322" font-family="IBM Plex Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">bit 0</text>
+
+  <text x="130" y="360" font-family="IBM Plex Mono, monospace" font-size="9" fill="#64748b">every other option is sent as 0xFF so the firmware ignores it</text>
+</svg>

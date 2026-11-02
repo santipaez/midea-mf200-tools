@@ -32,6 +32,8 @@ the flag, so the question was whether it could be triggered on its own.
 
 ## Findings
 
+![frame layout](docs/frames.svg)
+
 | Signal | Direction | Location |
 |---|---|---|
 | Fresh air (`wind_dispel`) | read | bit 6 of byte 39 in the status frame (`body[29]`), `0x80` becomes `0xC0` |
