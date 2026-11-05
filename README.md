@@ -73,6 +73,18 @@ The limit is a firmware policy, not a hardware capability. The drum and fan do
 run together without water in strategy D, which is why the conclusion is about
 policy rather than capability.
 
+## Automation angle
+
+For home automation the outcome is read-only. The status frame exposes
+`wind_dispel`, so an integration can observe when the machine enters its
+post-cycle air-fresh phase, but it cannot start that phase on its own. The MF200
+speaks the standard Midea V3 local protocol on `6444/TCP`, so the transport, key
+discovery and polling used by projects such as `midea-local` apply unchanged;
+what is gated is the program scheduling in firmware.
+
+If the goal is a standalone "fan only, no water, no heat" routine, the network
+path cannot provide it on this model. That is the finding, not a missing step.
+
 ## Disclosure
 
 The finding was reported to Midea's product team in Argentina, with the decoded
