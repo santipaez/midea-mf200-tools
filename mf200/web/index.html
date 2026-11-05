@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MF200 · local control (demo)</title>
+<style>
+  :root {
+    --bg: #070b14;
+    --card: #0f1626;
+    --card-2: #0c1321;
+    --line: #1e2a44;
+    --text: #e8eefc;
+    --muted: #8ea0c4;
+    --accent: #3ee6b0;
+    --accent-2: #7c9cff;
+    --danger: #ff6b81;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1100px 550px at 15% -10%, #16224a 0%, transparent 60%),
+      radial-gradient(900px 500px at 110% 0%, #0d3a33 0%, transparent 55%),
+      var(--bg);
+    min-height: 100vh;
+  }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 64px; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: .2px; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 16px var(--accent); }
+  .brand span.muted { font-weight: 450; }
+  .muted { color: var(--muted); }
+  .badge {
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--muted);
+  }
+  .badge.demo { border-color: #4a3a12; color: #ffcc66; background: #1a1405; }
+  .card {
+    background: linear-gradient(180deg, var(--card), var(--card-2));
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px; margin-bottom: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+  }
+  .hero { display: grid; gap: 18px; }
+  .state-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .eyebrow { margin: 0 0 6px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 0; font-size: 46px; line-height: 1; }
+  h1.running { color: var(--accent); text-shadow: 0 0 40px rgba(62,230,176,.35); }
+  .program { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+  .progress { height: 8px; border-radius: 999px; background: #101b30; overflow: hidden; border: 1px solid #14213a; }
+  .progress > div { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent-2), var(--accent)); transition: width .6s ease; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat { background: #0a1120; border: 1px solid #15203a; border-radius: 14px; padding: 12px 14px; }
+  .stat span { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .stat strong { font-size: 15px; font-weight: 600; }
+  .actions { display: flex; gap: 10px; }
+  button {
+    font: inherit; font-weight: 600; color: var(--text); cursor: pointer;
+    border: 1px solid var(--line); background: #131e34; border-radius: 12px;
+    padding: 11px 16px; transition: transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  button:hover { transform: translateY(-1px); border-color: #2e4570; }
+  button.primary { background: linear-gradient(180deg, #1f6b57, #15503f); border-color: #2b8a70; }
+  button.ghost { background: transparent; color: var(--muted); }
+  button.danger { background: transparent; border-color: #3a1e28; color: var(--danger); }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  h2 { margin: 0; font-size: 16px; letter-spacing: .02em; }
+  .section-head .muted { font-size: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .preset {
+    text-align: left; background: #0b1322; border: 1px solid #16213a; border-radius: 14px;
+    padding: 14px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .preset:hover { border-color: #2b8a70; }
+  .preset .name { font-weight: 600; }
+  .preset .id { font-size: 12px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .tag { align-self: flex-start; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #ffcc66; border: 1px solid #4a3a12; background: #1a1405; border-radius: 999px; padding: 2px 8px; }
+  details summary { cursor: pointer; font-weight: 600; }
+  .form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 12px; color: var(--muted); }
+  select, input[type="number"] {
+    font: inherit; color: var(--text); background: #0a1120; border: 1px solid #1a2742;
+    border-radius: 10px; padding: 9px 11px;
+  }
+  .checks { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+  .checks label { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
+  .frame {
+    margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: #070d18;
+    border: 1px solid #15203a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px; color: var(--accent); word-break: break-all; min-height: 42px;
+  }
+  .log { max-height: 220px; overflow: auto; }
+  .log ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+  .log li { display: flex; gap: 12px; font-size: 13px; border-bottom: 1px dashed #16213a; padding-bottom: 8px; }
+  .log time { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 64px; }
+  footer { margin-top: 22px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+  code { color: #bcd0ff; }
+  @media (max-width: 640px) {
+    h1 { font-size: 36px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .form { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header>
+    <div class="brand"><span class="dot"></span> MF200 <span class="muted">local control</span></div>
+    <span class="badge demo">demo · fake device</span>
+  </header>
+
+  <section class="card hero">
+    <div class="state-row">
+      <div>
+        <p class="eyebrow">Machine state</p>
+        <h1 id="state">idle</h1>
+        <p class="program"><span id="program">cotton</span> · <span id="progress">idle</span></p>
+      </div>
+      <div class="actions">
+        <button id="stop" class="danger" type="button">Stop</button>
+      </div>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="stats">
+      <div class="stat"><span>Remaining</span><strong id="remaining">—</strong></div>
+      <div class="stat"><span>Temperature</span><strong id="temperature">default</strong></div>
+      <div class="stat"><span>Spin</span><strong id="spin">default</strong></div>
+      <div class="stat"><span>Water</span><strong id="water">default</strong></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="section-head">
+      <h2>Presets</h2>
+      <span class="muted">firmware defaults, one tap</span>
+    </div>
+    <div id="presets" class="grid">Loading…</div>
+  </section>
+
+  <details class="card">
+    <summary>Advanced frame</summary>
+    <div class="form">
+      <div class="field">
+        <label for="base">Base preset</label>
+        <select id="base"></select>
+      </div>
+      <div class="field">
+        <label for="temperature">Temperature</label>
+        <select id="temperature">
+          <option value="">firmware default</option>
+          <option>0</option><option>20</option><option>30</option>
+          <option>40</option><option>60</option><option>70</option><option>95</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="spin">Spin (RPM)</label>
+        <select id="spin">
+          <option value="">firmware default</option>
+          <option>0</option><option>400</option><option>600</option><option>800</option>
+          <option>1000</option><option>1200</option><option>1300</option><option>1400</option><option>1600</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="water">Water level</label>
+        <select id="water">
+          <option value="">firmware default</option>
+          <option>low</option><option>mid</option><option>high</option><option>auto</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="wash">Wash minutes</label>
+        <input id="wash" type="number" min="0" max="254" placeholder="default">
+      </div>
+      <div class="field">
+        <label for="spinMinutes">Spin minutes</label>
+        <input id="spinMinutes" type="number" min="0" max="254" placeholder="default">
+      </div>
+      <div class="field">
+        <label for="dryer">Dryer level</label>
+        <select id="dryer">
+          <option value="">off / default</option>
+          <option>0</option><option>1</option><option>2</option><option>3</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Feature flags</label>
+        <div class="checks">
+          <label><input id="steam" type="checkbox"> steam</label>
+          <label><input id="air" type="checkbox"> air fresh</label>
+          <label><input id="spray" type="checkbox"> spray</label>
+        </div>
+      </div>
+    </div>
+    <div class="frame" id="frame">Select options to preview the 22-byte control body.</div>
+    <div class="actions" style="margin-top:14px">
+      <button id="preview" type="button">Preview</button>
+      <button id="runAdvanced" class="primary" type="button">Run with these options</button>
+    </div>
+  </details>
+
+  <section class="card log">
+    <h2>Activity</h2>
+    <ul id="log"><li><time>—</time><span class="muted">No frames sent yet.</span></li></ul>
+  </section>
+
+  <footer>
+    Demo mode: the appliance is simulated and no socket is opened. Every frame is built by
+    <code>mf200.frames</code>, so the bytes shown are the ones the CLI would send. The real
+    device path is <code>python -m mf200 run &lt;preset&gt;</code>.
+  </footer>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const stateEl = $("state"), programEl = $("program"), progressEl = $("progress");
+const remainingEl = $("remaining"), tempEl = $("temperature"), spinEl = $("spin"), waterEl = $("water");
+const barEl = $("bar"), logEl = $("log"), frameEl = $("frame");
+const baseSel = $("base");
+
+let presets = [];
+
+function logLine(text, timeText) {
+  const li = document.createElement("li");
+  const time = document.createElement("time");
+  time.textContent = timeText || new Date().toLocaleTimeString();
+  const span = document.createElement("span");
+  span.textContent = text;
+  li.append(time, span);
+  logEl.prepend(li);
+  while (logEl.children.length > 8) logEl.lastElementChild.remove();
+}
+
+function renderStatus(s) {
+  const running = s.status === "start";
+  stateEl.textContent = s.status;
+  stateEl.classList.toggle("running", running);
+  programEl.textContent = s.program;
+  progressEl.textContent = s.progress;
+  remainingEl.textContent = s.time_remaining ? `${s.time_remaining} min` : "—";
+  tempEl.textContent = s.temperature;
+  spinEl.textContent = s.dehydration_speed;
+  waterEl.textContent = s.water_level;
+  barEl.style.width = running ? "62%" : s.status === "end" ? "100%" : "0%";
+}
+
+async function getStatus() {
+  try {
+    const res = await fetch("/api/status");
+    renderStatus(await res.json());
+  } catch (_) { /* demo server stopped */ }
+}
+
+function overrides() {
+  const payload = {};
+  const map = { temperature: "temperature", spin: "spin_rpm", water: "water_level",
+                wash: "wash_minutes", spinMinutes: "spin_minutes", dryer: "dryer_level" };
+  for (const [id, key] of Object.entries(map)) {
+    const value = $(id).value;
+    if (value !== "") payload[key] = Number.isNaN(Number(value)) ? value : Number(value);
+  }
+  payload.steam = $("steam").checked;
+  payload.air_fresh = $("air").checked;
+  payload.spray = $("spray").checked;
+  return payload;
+}
+
+async function preview() {
+  const payload = { preset: baseSel.value, ...overrides() };
+  const res = await fetch("/api/frame", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  frameEl.textContent = data.error ? `error: ${data.error}` : `${data.preset} · ${data.body}`;
+}
+
+async function run(preset) {
+  const payload = { preset, ...overrides() };
+  const res = await fetch("/api/run", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  if (data.error) { logLine(`error: ${data.error}`); return; }
+  logLine(`${data.preset} → ${data.body}`, data.time);
+  renderStatus(data.status);
+  preview();
+}
+
+async function stop() {
+  const res = await fetch("/api/stop", { method: "POST" });
+  renderStatus(await res.json());
+  logLine("stop · machine powered off");
+}
+
+async function boot() {
+  const res = await fetch("/api/presets");
+  presets = (await res.json()).presets;
+  const grid = $("presets");
+  grid.textContent = "";
+  for (const preset of presets) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "preset";
+    button.innerHTML = `<span class="name">${preset.name}</span><span class="id">0x${preset.program.toString(16).padStart(2, "0").toUpperCase()}</span>${preset.note ? `<span class="tag">${preset.note}</span>` : ""}`;
+    button.addEventListener("click", () => run(preset.name));
+    grid.append(button);
+    const option = document.createElement("option");
+    option.value = preset.name;
+    option.textContent = preset.name;
+    baseSel.append(option);
+  }
+  baseSel.value = presets.some((p) => p.name === "quick") ? "quick" : presets[0]?.name;
+  await getStatus();
+  try {
+    const history = (await (await fetch("/api/history")).json()).history;
+    if (history.length) logEl.textContent = "";
+    for (const item of history) logLine(`${item.preset} → ${item.body}`, item.time);
+  } catch (_) { /* history is optional */ }
+  preview();
+}
+
+$("stop").addEventListener("click", stop);
+$("preview").addEventListener("click", preview);
+$("runAdvanced").addEventListener("click", () => run(baseSel.value));
+for (const id of ["base", "temperature", "spin", "water", "wash", "spinMinutes", "dryer", "steam", "air", "spray"]) {
+  $(id).addEventListener("change", preview);
+}
+setInterval(getStatus, 2000);
+if (new URLSearchParams(location.search).has("advanced")) document.querySelector("details").open = true;
+boot();
+</script>
+</body>
+</html>
