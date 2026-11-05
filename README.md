@@ -85,6 +85,28 @@ what is gated is the program scheduling in firmware.
 If the goal is a standalone "fan only, no water, no heat" routine, the network
 path cannot provide it on this model. That is the finding, not a missing step.
 
+## Control layer
+
+The same protocol map makes the rest of the machine programmable, so the
+repository ships a small control layer on top of it: a typed builder for the
+22-byte body, named presets, a CLI, and a demo UI that runs against a fake
+device. It does not change the finding above; `fresh_air` is still rejected.
+
+```bash
+python -m mf200 presets
+python -m mf200 frame quick --temperature 40 --spin 800
+python -m mf200 run quick --dry-run      # exact bytes, no connection
+python -m mf200 demo                     # UI on http://127.0.0.1:8765
+```
+
+![Control layer demo](docs/demo.png)
+
+`run` uses `tools/results/credentials.json` and never stores keys in the
+package. The demo never opens a socket. The frame is documented byte by byte in
+[docs/control-frame.md](docs/control-frame.md) and the layer itself in
+[docs/control-layer.md](docs/control-layer.md). A UI is left to forks on
+purpose.
+
 ## Disclosure
 
 The finding was reported to Midea's product team in Argentina, with the decoded
@@ -108,7 +130,12 @@ any protection.
 ```
 tools/          numbered phase scripts, one per investigation step
 tools/midea_config.py   device address from the environment, never committed
+mf200/          reusable control layer (frames, presets, CLI, demo)
+tests/          golden-vector tests for the frame builder and the demo backend
 docs/protocol-map.md    offsets and frame layout
+docs/control-frame.md   the 22-byte control body, byte by byte
+docs/control-layer.md   how the control layer fits together and how to fork it
+docs/demo.png           the demo UI
 docs/notes-es.md        the working log, in Spanish, cleaned of secrets
 captures/       empty on purpose: raw captures stay local
 ```
