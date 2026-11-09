@@ -152,9 +152,25 @@ python 01_network_scan.py
 Scripts that talk to the device read `MIDEA_DEVICE_IP`. The cloud helper in step
 04 authenticates with the account you pass on the command line and caches the
 resulting token and key under `results/`, so the later phases can reconnect
-without asking again. That directory is gitignored and it holds live keys: delete
-it when you are done, and never commit it. Nothing secret ships in this
-repository.
+without asking again.
+
+> **`results/` holds live credentials.** It is gitignored, but nothing stops a
+> `git add -f`. Delete the directory when you are done, and treat anything that
+> lands there as a secret: a device key in a public commit lets anyone on your
+> network drive the appliance. Nothing secret ships in this repository.
+
+## Legal
+
+Not affiliated with, endorsed by, or supported by Midea. "Midea" and "MF200" are
+trademarks of their respective owners, used here only to describe the device this
+project talks to.
+
+The software is provided as-is, without warranty of any kind, and you assume the
+risk of running it. Using it may void your manufacturer's warranty.
+
+Use it only on hardware you own or are authorised to control. See
+[Scope and safety](#scope-and-safety) for what this repository deliberately does
+not do.
 
 ## License
 
