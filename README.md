@@ -154,6 +154,15 @@ Scripts that talk to the device read `MIDEA_DEVICE_IP`. The cloud helper in step
 resulting token and key under `results/`, so the later phases can reconnect
 without asking again.
 
+Step 04 is the only one that talks to a vendor server, and it does so once, to
+fetch the local token and key for your own device. It uses the third-party
+[`midea-local`](https://pypi.org/project/midea-local/) library with your own
+SmartHome account, which is how the Home Assistant integration bootstraps too.
+That call is subject to the vendor's terms and is your decision, not a
+requirement of this project: **if you already have the token and key from another
+source, skip step 04 entirely.** Every other script speaks only to the appliance
+on your local network.
+
 > **`results/` holds live credentials.** It is gitignored, but nothing stops a
 > `git add -f`. Delete the directory when you are done, and treat anything that
 > lands there as a secret: a device key in a public commit lets anyone on your
